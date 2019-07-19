@@ -14,7 +14,7 @@ variable "owner_tag" {
 }
 
 variable "project_tag" {
-  description = "Project code name or name, e.g. WMP-ECOMM, ANZ-GO"
+  description = "Project code name or name"
   default     = ""
 }
 
@@ -24,7 +24,7 @@ variable "cost_center_tag" {
 }
 
 variable "business_tag" {
-  description = "Business Stream that requires instance(s) e.g. ELT, Academic, Education, Infrastructure, Legal, etc"
+  description = "Business Stream that requires instance(s) e.g. Infrastructure, Legal, etc"
   default     = ""
 }
 
@@ -95,7 +95,7 @@ variable "ssh_key_name" {
 }
 
 variable "user_data" {
-  description = "A User Data script to execute while the server is booting. We remmend passing in a bash script that executes the run-consul script, which should have been installed in the Consul AMI by the install-consul module."
+  description = "A User Data script to execute while the server is booting."
   default     = ""
 }
 
