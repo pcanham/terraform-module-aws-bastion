@@ -69,9 +69,9 @@ EOF
 }
 
 resource "aws_iam_role_policy" "bastion" {
-  count = var.create_bastion ? 1 : 0
-  name = "bastion"
-  role = aws_iam_role.bastion[0].id
+  count  = var.create_bastion ? 1 : 0
+  name   = "bastion"
+  role   = aws_iam_role.bastion[0].id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -129,26 +129,26 @@ resource "aws_autoscaling_group" "autoscaling_group" {
   tag {
     key = "Name"
     value = lower(
-                            format(
-                              "%s-bastion-%s-%s-%s",
-                              var.bastion_os,
-                              var.project_tag,
-                              var.environment_tag,
-                              var.vpc_id,
-                              ),
-                            )
+      format(
+        "%s-bastion-%s-%s-%s",
+        var.bastion_os,
+        var.project_tag,
+        var.environment_tag,
+        var.vpc_id,
+      ),
+    )
     propagate_at_launch = true
   }
 
   dynamic "tag" {
     for_each = var.tags
 
-      content {
-        key                 = tag.key
-        value               = tag.value
-        propagate_at_launch = true
-      }
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
     }
+  }
 
 }
 
@@ -157,8 +157,8 @@ data "template_file" "nix_user-data" {
   count    = (var.create_bastion == true && var.bastion_os == "nix") ? 1 : 0
   template = file("${path.module}/user-data.sh")
   vars = {
-      region            = var.aws_region
-      eip-allocation-id = aws_eip.bastion_ip[0].id
+    region            = var.aws_region
+    eip-allocation-id = aws_eip.bastion_ip[0].id
   }
 }
 
@@ -166,8 +166,8 @@ data "template_file" "win_user-data" {
   count    = (var.create_bastion == true && var.bastion_os == "win") ? 1 : 0
   template = file("${path.module}/user-data.sh")
   vars = {
-      region            = var.aws_region
-      eip-allocation-id = aws_eip.bastion_ip[0].id
+    region            = var.aws_region
+    eip-allocation-id = aws_eip.bastion_ip[0].id
   }
 }
 
@@ -177,7 +177,7 @@ resource "aws_launch_configuration" "launch_configuration" {
   image_id      = var.ami_id == "" ? data.aws_ami.nix_jumpbox[0].image_id : var.ami_id
   instance_type = var.instance_type
   user_data     = data.template_file.nix_user-data[0].rendered
-  spot_price    = var.spot_price
+  spot_price    = ""
 
   iam_instance_profile        = aws_iam_instance_profile.bastion[0].name
   key_name                    = var.ssh_key_name
@@ -222,15 +222,15 @@ resource "aws_security_group" "bastion_security_group" {
   }
 
   tags = merge(
-    local.common_tags,
+    var.tags,
     { "Name" = lower(
-                format(
-                  "sg-bastion-%s-%s-%s",
-                  var.project_tag,
-                  var.environment_tag,
-                  var.vpc_id,
-                  ),
-                )
+      format(
+        "sg-bastion-%s-%s-%s",
+        var.project_tag,
+        var.environment_tag,
+        var.vpc_id,
+      ),
+      )
     }
   )
 }
