@@ -56,7 +56,7 @@ resource "aws_iam_role" "bastion" {
 EOF
 
   tags = merge(
-    local.common_tags,
+    var.tags,
     { "Name" = lower(
       format(
         "bastion-%s-%s",
@@ -94,15 +94,15 @@ resource "aws_eip" "bastion_ip" {
   vpc   = true
 
   tags = merge(
-    local.common_tags,
+    var.tags,
     { "Name" = lower(
-                  format(
-                    "bastion-eip-%s-%s",
-                    var.project_tag,
-                    var.environment_tag,
-                    ),
-                  )
-  }
+      format(
+        "bastion-eip-%s-%s",
+        var.project_tag,
+        var.environment_tag,
+      ),
+      )
+    }
   )
 }
 
@@ -141,7 +141,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
   }
 
   dynamic "tag" {
-      for_each = local.common_tags
+    for_each = var.tags
 
       content {
         key                 = tag.key
