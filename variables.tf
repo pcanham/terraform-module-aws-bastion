@@ -118,9 +118,9 @@ variable "public_cidr_blocks" {
   default     = []
 }
 
-variable "cidr_whitelist" {
+variable "cidr_allowlist" {
   type        = list
-  description = "CIDR Whitelist"
+  description = "CIDR Allow list"
   default     = ["0.0.0.0/0"]
 }
 

@@ -241,7 +241,7 @@ resource "aws_security_group_rule" "allow_ssh_inbound_bastion" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = var.cidr_whitelist
+  cidr_blocks       = var.cidr_allowlist
   security_group_id = aws_security_group.bastion_security_group[0].id
 }
 
@@ -251,7 +251,7 @@ resource "aws_security_group_rule" "allow_rdp_inbound_bastion" {
   from_port         = 3389
   to_port           = 3389
   protocol          = "tcp"
-  cidr_blocks       = var.cidr_whitelist
+  cidr_blocks       = var.cidr_allowlist
   security_group_id = aws_security_group.bastion_security_group[0].id
 }
 
@@ -261,7 +261,7 @@ resource "aws_security_group_rule" "allow_winrm_inbound_bastion" {
   from_port         = 5985
   to_port           = 5986
   protocol          = "tcp"
-  cidr_blocks       = var.cidr_whitelist
+  cidr_blocks       = var.cidr_allowlist
   security_group_id = aws_security_group.bastion_security_group[0].id
 }
 
