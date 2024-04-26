@@ -39,7 +39,7 @@ variable "aws_region" {
 }
 
 variable "availability_zones" {
-  type        = "list"
+  type        = list(string)
   description = "AWS region to launch servers."
   default     = []
 }
@@ -115,13 +115,13 @@ variable "vpc_id" {
 }
 
 variable "public_cidr_blocks" {
-  type        = "list"
+  type        = list(string)
   description = "CIDR Blocks for Public Subnets"
   default     = []
 }
 
 variable "cidr_whitelist" {
-  type        = "list"
+  type        = list(string)
   description = "CIDR Whitelist"
   default     = ["0.0.0.0/0"]
 }
@@ -129,7 +129,7 @@ variable "cidr_whitelist" {
 ## going to be used for Windows or Linux Bastion selection.
 variable "bastion_os_list" {
   description = "Operating System List"
-  type        = "list"
+  type        = list(string)
   default     = ["win", "nix"]
 }
 
