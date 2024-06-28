@@ -68,7 +68,7 @@ variable "instance_profile_path" {
 variable "spot_price" {
   type        = number
   description = "The maximum hourly price to pay for EC2 Spot Instances."
-  default     = ""
+  nullable    = true
 }
 
 variable "ami_id" {
