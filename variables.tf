@@ -1,43 +1,14 @@
 variable "create_bastion" {
   type        = bool
   description = "Boolean create bastion true or false"
-  default     = ""
+  default     = true
 }
 
-variable "environment_tag" {
+variable "custom_suffix" {
   type        = string
-  description = "Define the type of environment"
-  default     = ""
-}
-
-variable "owner_tag" {
-  type        = string
-  description = "Identifies the role that is responsible for the service"
-  default     = ""
-}
-
-variable "project_tag" {
-  type        = string
-  description = "Project code name or name, e.g. WMP-ECOMM, ANZ-GO"
-  default     = ""
-}
-
-variable "cost_center_tag" {
-  type        = string
-  description = "Budget code for responsible for the service"
-  default     = ""
-}
-
-variable "business_tag" {
-  type        = string
-  description = "Business Stream that requires instance(s) e.g. ELT, Academic, Education, Infrastructure, Legal, etc"
-  default     = ""
-}
-
-variable "automation_tag" {
-  type        = string
-  description = "Tag to highlight services/components have been created with an automation tool"
-  default     = "Created with Terraform"
+  description = "enter a suffix which will be tagged to all created objects, if not set a random one will be assigned"
+  nullable    = true
+  default     = null
 }
 
 variable "aws_region" {

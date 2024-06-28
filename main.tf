@@ -47,7 +47,7 @@ data "aws_ami" "win_jumpbox" {
 
 resource "aws_iam_role" "bastion" {
   count              = var.create_bastion ? 1 : 0
-  name               = "bastion"
+  name               = format("bastion-%s", local.suffix)
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -56,12 +56,11 @@ resource "aws_iam_role" "bastion" {
 EOF
 
   tags = merge(
-    local.common_tags,
+    var.tags,
     { "Name" = lower(
       format(
-        "bastion-%s-%s",
-        var.project_tag,
-        var.environment_tag,
+        "bastion-%s",
+        local.suffix
       ),
       )
     }
@@ -70,7 +69,7 @@ EOF
 
 resource "aws_iam_role_policy" "bastion" {
   count  = var.create_bastion ? 1 : 0
-  name   = "bastion"
+  name   = format("bastion-%s", local.suffix)
   role   = aws_iam_role.bastion[0].id
   policy = <<EOF
 {
@@ -85,7 +84,7 @@ EOF
 
 resource "aws_iam_instance_profile" "bastion" {
   count = var.create_bastion ? 1 : 0
-  name  = "bastion"
+  name  = format("bastion-%s", local.suffix)
   role  = aws_iam_role.bastion[0].name
 }
 
@@ -97,9 +96,8 @@ resource "aws_eip" "bastion_ip" {
     local.common_tags,
     { "Name" = lower(
       format(
-        "bastion-eip-%s-%s",
-        var.project_tag,
-        var.environment_tag,
+        "bastion-eip-%s",
+        local.suffix
       ),
       )
     }
@@ -130,10 +128,9 @@ resource "aws_autoscaling_group" "autoscaling_group" {
     key = "Name"
     value = lower(
       format(
-        "%s-bastion-%s-%s-%s",
+        "%s-bastion-%s-%s",
         var.bastion_os,
-        var.project_tag,
-        var.environment_tag,
+        local.suffix,
         var.vpc_id,
       ),
     )
@@ -173,7 +170,7 @@ data "template_file" "win_user-data" {
 
 resource "aws_launch_configuration" "launch_configuration" {
   count         = var.create_bastion ? 1 : 0
-  name_prefix   = "bastion"
+  name_prefix   = format("bastion-%s", local.suffix)
   image_id      = var.ami_id == "" ? data.aws_ami.nix_jumpbox[0].image_id : var.ami_id
   instance_type = var.instance_type
   user_data     = data.template_file.nix_user-data[0].rendered
@@ -210,7 +207,7 @@ resource "aws_launch_configuration" "launch_configuration" {
 
 resource "aws_security_group" "bastion_security_group" {
   count       = var.create_bastion ? 1 : 0
-  name_prefix = "bastion"
+  name_prefix = format("bastion-%s", local.suffix)
   description = "Security group for the bastion launch configuration"
   vpc_id      = var.vpc_id
 
@@ -225,9 +222,8 @@ resource "aws_security_group" "bastion_security_group" {
     local.common_tags,
     { "Name" = lower(
       format(
-        "sg-bastion-%s-%s-%s",
-        var.project_tag,
-        var.environment_tag,
+        "sg-bastion-%s-%s",
+        local.suffix,
         var.vpc_id,
       ),
       )
