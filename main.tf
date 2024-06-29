@@ -24,6 +24,7 @@ data "aws_ami" "nix_jumpbox" {
   }
 }
 
+/*
 data "aws_ami" "win_jumpbox" {
   count       = (var.create_bastion == true && var.bastion_os == "win") ? 1 : 0
   most_recent = true
@@ -44,6 +45,7 @@ data "aws_ami" "win_jumpbox" {
     values = ["Windows_Server-2019-English-Full-Base-*"]
   }
 }
+*/
 
 resource "aws_iam_role" "bastion" {
   count              = var.create_bastion ? 1 : 0
@@ -150,7 +152,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
 }
 
 
-data "template_file" "nix_user-data" {
+data "template_file" "nix_user_data" {
   count    = (var.create_bastion == true && var.bastion_os == "nix") ? 1 : 0
   template = file("${path.module}/user-data.sh")
   vars = {
@@ -159,7 +161,8 @@ data "template_file" "nix_user-data" {
   }
 }
 
-data "template_file" "win_user-data" {
+/*
+data "template_file" "win_user_data" {
   count    = (var.create_bastion == true && var.bastion_os == "win") ? 1 : 0
   template = file("${path.module}/user-data.sh")
   vars = {
@@ -167,13 +170,14 @@ data "template_file" "win_user-data" {
     eip-allocation-id = aws_eip.bastion_ip[0].id
   }
 }
+*/
 
 resource "aws_launch_configuration" "launch_configuration" {
   count         = var.create_bastion ? 1 : 0
   name_prefix   = format("bastion-%s", local.suffix)
   image_id      = var.ami_id == "" ? data.aws_ami.nix_jumpbox[0].image_id : var.ami_id
   instance_type = var.instance_type
-  user_data     = data.template_file.nix_user-data[0].rendered
+  user_data     = data.template_file.nix_user_data[0].rendered
   spot_price    = var.spot_price
 
   iam_instance_profile        = aws_iam_instance_profile.bastion[0].name
@@ -188,6 +192,10 @@ resource "aws_launch_configuration" "launch_configuration" {
     volume_size           = var.root_volume_size
     delete_on_termination = var.root_volume_delete_on_termination
   }
+
+	 metadata_options {
+	   http_tokens = "required"
+	 }
 
   # Important note: whenever using a launch configuration with an auto scaling group, you must set
   # create_before_destroy = true. However, as soon as you set create_before_destroy = true in one resource, you must
@@ -234,6 +242,7 @@ resource "aws_security_group" "bastion_security_group" {
 resource "aws_security_group_rule" "allow_ssh_inbound_bastion" {
   count             = (var.create_bastion == true && var.bastion_os == "nix") ? 1 : 0
   type              = "ingress"
+  description       = "Allow inbound SSH traffic"
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
@@ -244,6 +253,7 @@ resource "aws_security_group_rule" "allow_ssh_inbound_bastion" {
 resource "aws_security_group_rule" "allow_rdp_inbound_bastion" {
   count             = (var.create_bastion == true && var.bastion_os == "win") ? 1 : 0
   type              = "ingress"
+  description       = "Allow inbound RDP traffic"
   from_port         = 3389
   to_port           = 3389
   protocol          = "tcp"
@@ -254,6 +264,7 @@ resource "aws_security_group_rule" "allow_rdp_inbound_bastion" {
 resource "aws_security_group_rule" "allow_winrm_inbound_bastion" {
   count             = (var.create_bastion == true && var.bastion_os == "win") ? 1 : 0
   type              = "ingress"
+  description       = "Allow inbound winRM traffic"
   from_port         = 5985
   to_port           = 5986
   protocol          = "tcp"
@@ -264,6 +275,7 @@ resource "aws_security_group_rule" "allow_winrm_inbound_bastion" {
 resource "aws_security_group_rule" "allow_all_outbound_bastion" {
   count             = var.create_bastion ? 1 : 0
   type              = "egress"
+  description       = "Allow all outbound traffic"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
