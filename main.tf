@@ -93,7 +93,7 @@ resource "aws_eip" "bastion_ip" {
   vpc   = true
 
   tags = merge(
-    local.common_tags,
+    var.tags,
     { "Name" = lower(
       format(
         "bastion-eip-%s",
@@ -138,7 +138,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
   }
 
   dynamic "tag" {
-    for_each = local.common_tags
+    for_each = var.tags
 
     content {
       key                 = tag.key
@@ -219,7 +219,7 @@ resource "aws_security_group" "bastion_security_group" {
   }
 
   tags = merge(
-    local.common_tags,
+    var.tags,
     { "Name" = lower(
       format(
         "sg-bastion-%s-%s",

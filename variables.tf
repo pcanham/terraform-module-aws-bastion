@@ -131,3 +131,9 @@ variable "bastion_os" {
   description = "Which operating system do you want (options: nix, win):"
   default     = "nix"
 }
+
+variable "tags" {
+  type        = map(string)
+  description = "A map of tags to add to all resources."
+  default     = {}
+}
