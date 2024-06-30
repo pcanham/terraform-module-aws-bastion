@@ -44,9 +44,7 @@ No modules.
 | [aws_security_group_rule.allow_winrm_inbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/security_group_rule) | resource |
 | [random_id.suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/id) | resource |
 | [aws_ami.nix_jumpbox](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/data-sources/ami) | data source |
-| [aws_ami.win_jumpbox](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/data-sources/ami) | data source |
-| [template_file.nix_user-data](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
-| [template_file.win_user-data](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
+| [template_file.nix_user_data](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 

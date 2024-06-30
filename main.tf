@@ -193,9 +193,9 @@ resource "aws_launch_configuration" "launch_configuration" {
     delete_on_termination = var.root_volume_delete_on_termination
   }
 
-	 metadata_options {
-	   http_tokens = "required"
-	 }
+  metadata_options {
+    http_tokens = "required"
+  }
 
   # Important note: whenever using a launch configuration with an auto scaling group, you must set
   # create_before_destroy = true. However, as soon as you set create_before_destroy = true in one resource, you must
