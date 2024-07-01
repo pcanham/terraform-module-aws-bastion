@@ -51,6 +51,7 @@ variable "spot_price" {
   type        = number
   description = "The maximum hourly price to pay for EC2 Spot Instances."
   nullable    = true
+  default     = null
 }
 
 variable "ami_id" {
