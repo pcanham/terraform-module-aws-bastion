@@ -91,8 +91,8 @@ resource "aws_iam_instance_profile" "bastion" {
 }
 
 resource "aws_eip" "bastion_ip" {
-  count = var.create_bastion ? 1 : 0
-  vpc   = true
+  count  = var.create_bastion ? 1 : 0
+  domain = "vpc"
 
   tags = merge(
     var.tags,
