@@ -17,22 +17,10 @@ variable "aws_region" {
   default     = ""
 }
 
-variable "availability_zones" {
-  type        = list(string)
-  description = "AWS region to launch servers."
-  default     = []
-}
-
 variable "termination_policies" {
   type        = string
   description = "A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, Default."
   default     = "Default"
-}
-
-variable "tenancy" {
-  type        = string
-  description = "The tenancy of the instance. Must be one of: default or dedicated."
-  default     = "default"
 }
 
 variable "root_volume_ebs_optimized" {
@@ -59,12 +47,6 @@ variable "root_volume_delete_on_termination" {
   default     = true
 }
 
-variable "instance_profile_path" {
-  type        = string
-  description = "Path in which to create the IAM instance profile."
-  default     = "/"
-}
-
 variable "spot_price" {
   type        = number
   description = "The maximum hourly price to pay for EC2 Spot Instances."
@@ -80,12 +62,6 @@ variable "ami_id" {
 variable "ssh_key_name" {
   type        = string
   description = "The name of an EC2 Key Pair that can be used to SSH to the EC2 Instances in this cluster. Set to an empty string to not associate a Key Pair."
-  default     = ""
-}
-
-variable "user_data" {
-  type        = string
-  description = "A User Data script to execute while the server is booting. We remmend passing in a bash script that executes the run-consul script, which should have been installed in the Consul AMI by the install-consul module."
   default     = ""
 }
 
@@ -119,17 +95,14 @@ variable "cidr_whitelist" {
   default     = ["0.0.0.0/0"]
 }
 
-## going to be used for Windows or Linux Bastion selection.
-variable "bastion_os_list" {
-  type        = list(string)
-  description = "Operating System List"
-  default     = ["win", "nix"]
-}
-
 variable "bastion_os" {
   type        = string
   description = "Which operating system do you want (options: nix, win):"
   default     = "nix"
+  validation {
+    condition     = contains(["nix", "win"], lower(var.bastion_os))
+    error_message = "Unsupported bastion_os type needs to be: \"nix\", \"win\"!"
+  }
 }
 
 variable "tags" {
