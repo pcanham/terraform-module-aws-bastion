@@ -1,3 +1,10 @@
+## [0.1.2](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/compare/0.1.1...0.1.2) (2025-01-25)
+
+
+### Bug Fixes
+
+* markdown lint fixes ([0c401ce](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/0c401ce4e4079a10b0bc2afb7b8ebfdf01516f09))
+
 ## [0.1.1](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/compare/0.1.0...0.1.1) (2024-07-01)
 
 
