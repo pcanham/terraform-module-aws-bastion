@@ -1,3 +1,5 @@
+# AWS Bastion EC2 deployment
+
 ## Util
 Applications used within this repo to help with CHANGELOG creation and also checking files within the repo
 
