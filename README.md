@@ -13,17 +13,17 @@ Applications used within this repo to help with CHANGELOG creation and also chec
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.56.1 |
-| <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.1 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.6.2 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.84.0 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.2 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.6.3 |
 | <a name="requirement_template"></a> [template](#requirement\_template) | 2.2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.56.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.2 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.84.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
 | <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
 
 ## Modules
@@ -34,19 +34,19 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_autoscaling_group.autoscaling_group](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/autoscaling_group) | resource |
-| [aws_eip.bastion_ip](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/eip) | resource |
-| [aws_iam_instance_profile.bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/iam_instance_profile) | resource |
-| [aws_iam_role.bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy.bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/iam_role_policy) | resource |
-| [aws_launch_configuration.launch_configuration](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/launch_configuration) | resource |
-| [aws_security_group.bastion_security_group](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/security_group) | resource |
-| [aws_security_group_rule.allow_all_outbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.allow_rdp_inbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.allow_ssh_inbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.allow_winrm_inbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/resources/security_group_rule) | resource |
-| [random_id.suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/id) | resource |
-| [aws_ami.nix_jumpbox](https://registry.terraform.io/providers/hashicorp/aws/5.56.1/docs/data-sources/ami) | data source |
+| [aws_autoscaling_group.autoscaling_group](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/autoscaling_group) | resource |
+| [aws_eip.bastion_ip](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/eip) | resource |
+| [aws_iam_instance_profile.bastion](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/iam_instance_profile) | resource |
+| [aws_iam_role.bastion](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.bastion](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/iam_role_policy) | resource |
+| [aws_launch_configuration.launch_configuration](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/launch_configuration) | resource |
+| [aws_security_group.bastion_security_group](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/security_group) | resource |
+| [aws_security_group_rule.allow_all_outbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.allow_rdp_inbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.allow_ssh_inbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.allow_winrm_inbound_bastion](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/resources/security_group_rule) | resource |
+| [random_id.suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.3/docs/resources/id) | resource |
+| [aws_ami.nix_jumpbox](https://registry.terraform.io/providers/hashicorp/aws/5.84.0/docs/data-sources/ami) | data source |
 | [template_file.nix_user_data](https://registry.terraform.io/providers/hashicorp/template/2.2.0/docs/data-sources/file) | data source |
 
 ## Inputs
@@ -66,7 +66,7 @@ No modules.
 | <a name="input_root_volume_ebs_optimized"></a> [root\_volume\_ebs\_optimized](#input\_root\_volume\_ebs\_optimized) | If true, the launched EC2 instance will be EBS-optimized. | `bool` | `false` | no |
 | <a name="input_root_volume_size"></a> [root\_volume\_size](#input\_root\_volume\_size) | The size, in GB, of the root EBS volume. | `number` | `50` | no |
 | <a name="input_root_volume_type"></a> [root\_volume\_type](#input\_root\_volume\_type) | The type of volume. Must be one of: standard, gp2, or io1. | `string` | `"standard"` | no |
-| <a name="input_spot_price"></a> [spot\_price](#input\_spot\_price) | The maximum hourly price to pay for EC2 Spot Instances. | `number` | n/a | yes |
+| <a name="input_spot_price"></a> [spot\_price](#input\_spot\_price) | The maximum hourly price to pay for EC2 Spot Instances. | `number` | `null` | no |
 | <a name="input_ssh_key_name"></a> [ssh\_key\_name](#input\_ssh\_key\_name) | The name of an EC2 Key Pair that can be used to SSH to the EC2 Instances in this cluster. Set to an empty string to not associate a Key Pair. | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 | <a name="input_termination_policies"></a> [termination\_policies](#input\_termination\_policies) | A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, Default. | `string` | `"Default"` | no |
