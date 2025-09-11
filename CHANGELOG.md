@@ -1,3 +1,24 @@
+## [0.1.3](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/compare/0.1.2...0.1.3) (2025-09-11)
+
+
+### Bug Fixes
+
+* add exclusion of shellcheck ([4889d62](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/4889d62447277ab11ce0109b2a90572e93e59e59))
+* disable grype seeing issues with megalinter ([80fcac2](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/80fcac29962380f1330dafe06d6da196b6b2116e))
+* ignore markdownlint 80 char line limit ([e94f285](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/e94f285ec73392a135361c4d4272e5bd2a17a701))
+* **chore:** lint fixes ([682d480](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/682d4803c3800de67f65dc2678421094772b70b5))
+* **chore:** lint fixes ([9c13e92](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/9c13e92b7099d2df927fe0d0812407667b43e4fc))
+* lint line ends fix ([4e5e16e](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/4e5e16ec11489e625149923e2ddc92f4c5010054))
+* **chore:** markdown lint headers fix ([c2f3629](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/c2f36299d51c50c1c174cc450dd7f8010012ac6d))
+* **lint:** prettier error for json format ([fb375d3](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/fb375d3d432d828f77910be3072a69211d52b161))
+* stop parallel running of megalinter workarounf gh [#4591](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/issues/4591) ([9493bb8](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/9493bb811710bf092f10362ddb5442f9c4ebafa1))
+
+
+### Features
+
+* move to central gitlab-ci template repo ([e92b395](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/e92b39534e1436b262552457973b9636f508c535))
+* standardising mega-linter config for tf modules ([3615838](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/commit/36158387b0502b810faccdb79016a82170b39a85))
+
 ## [0.1.2](https://gitlab.localrealm.net/automation/terraform/terraform-modules/terraform-module-aws-bastion/compare/0.1.1...0.1.2) (2025-01-25)
 
 
