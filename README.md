@@ -1,5 +1,10 @@
 # AWS Bastion EC2 deployment
 
+>>> [!important]
+No longer maintained, recommend using the [AWS SSM Session Manager](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-with-systems-manager-session-manager.html) functionaility
+>>>
+
+
 ## Util
 
 Applications used within this repo to help with CHANGELOG creation and also checking files within the repo
